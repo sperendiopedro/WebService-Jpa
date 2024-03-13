@@ -7,11 +7,11 @@ import com.course.entities.Order;
 import com.course.entities.Product;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
+
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
 
 @Embeddable
 public class OrderItemPK implements Serializable {
