@@ -1,18 +1,24 @@
 package com.course.entities;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
-
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TB_PRODUCT")
-public class Product {
-
+public class Product implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,20 +27,24 @@ public class Product {
 	private String desc;
 	private Double price;
 	private String imgUrl;
-	private Category categories;
-
+	
+	@ManyToMany
+	@JoinTable(name = "TB_PROD_CAT", 
+	joinColumns = @JoinColumn(name = "product_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private Set<Category> categories = new HashSet<>();  
+	
 	public Product() {
 
 	}
 
-	public Product(Long id, String name, String desc, Double price, String imgUrl, Category categories) {
+	public Product(Long id, String name, String desc, Double price, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.price = price;
 		this.imgUrl = imgUrl;
-		this.categories = categories;
 	}
 
 	public String getName() {
@@ -73,13 +83,10 @@ public class Product {
 		return id;
 	}
 
-	public Category getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(Category categories) {
-		this.categories = categories;
-	}
 
 	@Override
 	public int hashCode() {

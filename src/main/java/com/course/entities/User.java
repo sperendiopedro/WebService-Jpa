@@ -11,31 +11,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "TB_USER")
-public class User implements Serializable{
-	private static final long serialVersionUID = 1L; 
-	
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private List<Order> orders = new ArrayList<>(); 
-	
-	
+	private List<Order> orders = new ArrayList<>();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; 
-	
-	private String name; 
-	private String email; 
-	private String psswd; 
-	private String phone; 
-	
-	public User() {	
+	private Long id;
+
+	private String name;
+	private String email;
+	private String psswd;
+	private String phone;
+
+	public User() {
 	}
 
 	public User(Long id, String name, String email, String psswd, String phone) {
@@ -107,8 +105,5 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", psswd=" + psswd + ", phone=" + phone + "]";
 	}
-	
-	
-
 
 }
