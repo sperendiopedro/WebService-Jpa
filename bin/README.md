@@ -1,0 +1,2 @@
+## WEB-SERVICE WITH JPA - HIBERNATE
+It uses H2-CONSOLE as a database. 
